@@ -81,42 +81,6 @@ public class MObject {
     }
 
 
-
-
-    void moveC(float x, float y, int resX, int resY){ //Движение круга
-        this.resolutionX = resX;
-        this.resolutionY = resY;
-        velocity = new Vector2D(x, y);
-        if (!velocityMemCheck) {
-            velocityMem = velocity;
-            velocityMemCheck = !velocityMemCheck;
-        }
-        if ((pos.x >= resolutionX - sizeC && velocityMem.x > 0) || (pos.x <= sizeC && velocityMem.x < 0)) {
-            velocityMem.changeX(velocityMem);
-        }
-        if ((pos.y >= resolutionY - 250 - sizeC && velocityMem.y > 0) || (pos.y <= 0 + sizeC && velocityMem.y < 0)) {
-            velocityMem.changeY(velocityMem);
-        }
-        pos.add(velocityMem);
-    }
-
-    void moveS(float x, float y, int resolutionX, int resolutionY){ //Движение квадрата
-        this.resolutionX = resolutionX;
-        this.resolutionY = resolutionY;
-        velocity = new Vector2D(x, y);
-        if (!velocityMemCheck) {
-            velocityMem = velocity;
-            velocityMemCheck = !velocityMemCheck;
-        }
-        if (pos.x <= resolutionX-sizeS || pos.x <= 0){
-            velocityMem.changeX(velocityMem);
-        }
-        if (pos.y >= resolutionY-250 || pos.y <= 0){
-            velocityMem.changeY(velocityMem);
-        }
-        pos.add(velocityMem);
-    }
-
     public String figureCircle() {
         return "Circle";
     }
