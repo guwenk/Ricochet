@@ -1,10 +1,7 @@
 package com.example.denis.balls;
 
-/**
- * Created by denis on 05.12.2016.
- */
 
-public class Vector2D {
+class Vector2D {
     float x, y;
 
     public String toString(){
@@ -15,32 +12,32 @@ public class Vector2D {
         this.y = 0;
     }
 
-    public void set(float x, float y){
+    void set(float x, float y){
         this.x = x;
         this.y = y;
     }
 
-    public void mul(float k){
+    void mul(float k){
         this.x *= k;
         this.y *= k;
     }
 
-    public void add(Vector2D v){
+    void add(Vector2D v){
         this.x += v.x;
         this.y += v.y;
     }
-    public void deduct(Vector2D v){
+    void deduct(Vector2D v){
         this.x -= v.x;
         this.y -= v.y;
     }
-    public void reverseX(Vector2D v){
+    void reverseX(){
         this.x *=-1;
     }
-    public void reverseY(Vector2D v){
+    void reverseY(){
         this.y *=-1;
     }
 
-    public Vector2D(float x, float y){
+    Vector2D(float x, float y){
         this.x = x;
         this.y = y;
     }
