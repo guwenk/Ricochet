@@ -1,26 +1,22 @@
 package com.example.denis.balls;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.view.MotionEvent;
 
 /**
  * Created by denis on 05.12.2016.
  */
 
 public class MObject {
-    Vector2D pos;
+    private Vector2D pos;
     Vector2D velocity;
-    Paint paint;
-    Bitmap pic;
-    float sizeS = 50f; //длина стороны квадрата
-    float sizeC = 30f; //радиус круга
-    private boolean velocityInMem = false;
     Vector2D velocityMem; //сохранение скорости в класс
-    int resolutionX = 720;
-    int resolutionY = 1280;
+    private Paint paint;
+    private float sizeS = 50f; //длина стороны квадрата
+    private float sizeC = 30f; //радиус круга
+    private boolean velocityMemCheck = false;
+    private int resolutionX;
+    private int resolutionY;
 
 
 
@@ -28,14 +24,15 @@ public class MObject {
     MObject(float posX, float posY){
         pos = new Vector2D(posX, posY);
         paint = new Paint();
+        resolutionX = 720;
+        resolutionY = 1280;
     }
     MObject(float posX, float posY, int color){
         pos = new Vector2D(posX, posY);
         paint = new Paint();
         paint.setColor(color);
-    }
-    MObject(Bitmap pic){
-        this.pic = pic;
+        resolutionX = 720;
+        resolutionY = 1280;
     }
     MObject(float posX, float posY, float size, int color){
         pos = new Vector2D(posX, posY);
@@ -43,6 +40,8 @@ public class MObject {
         paint.setColor(color);
         this.sizeC = size;
         this.sizeS = size;
+        resolutionX = 720;
+        resolutionY = 1280;
     }
 
 
@@ -55,16 +54,42 @@ public class MObject {
         canvas.drawRect(pos.x, pos.y, pos.x+this.sizeS, pos.y+sizeS, paint);
     }
 
-
-
-
-    void moveC(float x, float y, int resolutionX, int resolutionY){ //Движение круга
-        this.resolutionX = resolutionX;
-        this.resolutionY = resolutionY;
+    void move (float x, float y,String figure ,int resX, int resY){
+        this.resolutionX = resX;
+        this.resolutionY = resY;
         velocity = new Vector2D(x, y);
-        if (!velocityInMem) {
+        if (!velocityMemCheck) {
             velocityMem = velocity;
-            velocityInMem = !velocityInMem;
+            velocityMemCheck = !velocityMemCheck;
+        }
+        if (figure == "Circle"){
+            if ((pos.x >= resolutionX - sizeC && velocityMem.x > 0) || (pos.x <= sizeC && velocityMem.x < 0)) {
+                velocityMem.changeX(velocityMem);
+            }
+            if ((pos.y >= resolutionY - 250 - sizeC && velocityMem.y > 0) || (pos.y <= 0 + sizeC && velocityMem.y < 0)) {
+                velocityMem.changeY(velocityMem);
+            }
+        }else if (figure == "Square"){
+            if ((pos.x >= resolutionX-sizeS && velocityMem.x > 0) || (pos.x <= 0 && velocityMem.x < 0)){
+                velocityMem.changeX(velocityMem);
+            }
+            if ((pos.y >= resolutionY - 250 - sizeS && velocityMem.y > 0) || (pos.y <= 0 && velocityMem.y < 0)){
+                velocityMem.changeY(velocityMem);
+            }
+        }
+        pos.add(velocityMem);
+    }
+
+
+
+
+    void moveC(float x, float y, int resX, int resY){ //Движение круга
+        this.resolutionX = resX;
+        this.resolutionY = resY;
+        velocity = new Vector2D(x, y);
+        if (!velocityMemCheck) {
+            velocityMem = velocity;
+            velocityMemCheck = !velocityMemCheck;
         }
         if ((pos.x >= resolutionX - sizeC && velocityMem.x > 0) || (pos.x <= sizeC && velocityMem.x < 0)) {
             velocityMem.changeX(velocityMem);
@@ -74,26 +99,31 @@ public class MObject {
         }
         pos.add(velocityMem);
     }
+
     void moveS(float x, float y, int resolutionX, int resolutionY){ //Движение квадрата
         this.resolutionX = resolutionX;
         this.resolutionY = resolutionY;
         velocity = new Vector2D(x, y);
-        if (!velocityInMem) {
+        if (!velocityMemCheck) {
             velocityMem = velocity;
-            velocityInMem = !velocityInMem;
+            velocityMemCheck = !velocityMemCheck;
         }
-        if (pos.x <= 1280-sizeS || pos.x <= 0){
+        if (pos.x <= resolutionX-sizeS || pos.x <= 0){
             velocityMem.changeX(velocityMem);
         }
-        if (pos.y >= 800-185 || pos.y <= 0){
+        if (pos.y >= resolutionY-250 || pos.y <= 0){
             velocityMem.changeY(velocityMem);
         }
         pos.add(velocityMem);
     }
 
-
-
-
+    public String figureCircle() {
+        return "Circle";
+    }
+    public String figureSquare() {
+        return "Square";
+    }
+    /* Проверка косания
     boolean isTouchedS(MotionEvent event){
         return (event.getX() > pos.x && event.getX() < pos.x+sizeS &&
                 event.getY() > pos.y && event.getY() < pos.y+sizeS);
@@ -101,4 +131,5 @@ public class MObject {
     boolean isTouchedC(MotionEvent event){
         return (event.getX() > pos.x-sizeC && event.getX() < pos.x+sizeC && event.getY() > pos.y-sizeC && event.getX() < pos.y+sizeC);
     }
+    */
 }

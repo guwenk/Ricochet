@@ -14,25 +14,18 @@ import java.util.Random;
  * Created by denis on 05.12.2016.
  */
 
-public class MyDraw extends View implements Button.OnClickListener{
-    Vector2D v;
+public class MyDraw extends View{
     MObject[] arrMO;
     private Random rand;
-    int resX = 300;
-    int resY = 300;
-    int borderY;
-
-    public MyDraw(Context context, AttributeSet attrs, Vector2D v) {
-        super(context, attrs);
-        this.v = v;
-    }
+    private int resX = 300;
+    private int resY = 300;
+    private int borderY;
 
     public MyDraw(Context context, AttributeSet attrs) {
         super(context, attrs);
         rand = new Random();
-        v = new Vector2D(100,150);
         arrMO = new MObject[50];
-        for (int i = 0; i < arrMO.length; ++i)
+        for (int i = 0; i < arrMO.length; i++)
             arrMO[i] = new MObject((float)(Math.random() * 100+50), (float)(Math.random() * 100+50), (float)(Math.random()*25+10), Color.rgb(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255)));
 
     }
@@ -42,22 +35,21 @@ public class MyDraw extends View implements Button.OnClickListener{
     protected void onDraw(Canvas canvas) {
         borderY = resY-250;
         canvas.drawLine(0, borderY, resX, borderY, paint);
-        for(int i = 0; i < arrMO.length; i++)
-        {
+        for(int i = 0; i < arrMO.length/2; i++) {
             arrMO[i].drawCircle(canvas);
-            arrMO[i].moveC((float)((Math.random() * 500-250)*0.01),(float)((Math.random() * 500-250)*0.01), resX, resY);
+            arrMO[i].move((float)((Math.random() * 500-250)*0.01),(float)((Math.random() * 500-250)*0.01),arrMO[i].figureCircle() ,resX, resY);
+        }
+        for(int i = arrMO.length/2; i < arrMO.length; i++) {
+            arrMO[i].drawSquare(canvas);
+            arrMO[i].move((float)((Math.random() * 500-250)*0.01),(float)((Math.random() * 500-250)*0.01),arrMO[i].figureSquare() ,resX, resY);
         }
 
         invalidate();
     }
 
-
-
-
-    @Override
-    public void onClick(View view) {
-        for (int i = 0; i < arrMO.length; ++i){
-            arrMO[i].velocityMem.mul(-1);
-        }
+    public void setResolution(int resX, int resY) {
+        this.resX = resX;
+        this.resY = resY;
     }
+
 }

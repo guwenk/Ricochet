@@ -6,7 +6,7 @@
         tools:context="com.example.denis.balls.MainActivity"
         android:weightSum="1">
 
-        <com.example.student1.myapplication.MyDraw
+        <com.example.denis.balls.MyDraw
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/view"

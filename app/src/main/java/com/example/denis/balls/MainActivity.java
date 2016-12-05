@@ -18,33 +18,38 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         final MyDraw mydraw = (MyDraw)findViewById(R.id.view);
 
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(mydraw);
+        final Button buttonReverse = (Button)findViewById(R.id.button);
+        buttonReverse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < mydraw.arrMO.length; ++i){
+                    mydraw.arrMO[i].velocityMem.mul(-1);
+                }
+            }
+        });
 
-        Button btnSpeedUp = (Button)findViewById(R.id.buttonSpeedUp);
+        final Button btnSpeedUp = (Button)findViewById(R.id.buttonSpeedUp);
         btnSpeedUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 for (int i = 0; i < mydraw.arrMO.length;i++){
-                    mydraw.arrMO[i].velocityMem.set(mydraw.arrMO[i].velocityMem.x*1.1f,mydraw.arrMO[i].velocityMem.y*1.1f);
+                    mydraw.arrMO[i].velocityMem.set(mydraw.arrMO[i].velocityMem.x * 1.1f,mydraw.arrMO[i].velocityMem.y * 1.1f);
                 }
             }
         });
-
-        Button btnSlowDown = (Button)findViewById(R.id.buttonSlowDown);
+        final Button btnSlowDown = (Button)findViewById(R.id.buttonSlowDown);
         btnSlowDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 for (int i = 0; i < mydraw.arrMO.length;i++){
-                    mydraw.arrMO[i].velocityMem.set(mydraw.arrMO[i].velocityMem.x/1.1f,mydraw.arrMO[i].velocityMem.y/1.1f);
+                    mydraw.arrMO[i].velocityMem.set(mydraw.arrMO[i].velocityMem.x / 1.1f,mydraw.arrMO[i].velocityMem.y / 1.1f);
                 }
             }
         });
 
-        Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
+        final Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
         Point p = new Point();
         display.getSize(p);
-        mydraw.resX = p.x;
-        mydraw.resY = p.y;
+        mydraw.setResolution(p.x, p.y);
     }
 }
