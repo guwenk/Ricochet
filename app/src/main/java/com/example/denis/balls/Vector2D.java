@@ -33,10 +33,10 @@ public class Vector2D {
         this.x -= v.x;
         this.y -= v.y;
     }
-    public void changeX(Vector2D v){
+    public void reverseX(Vector2D v){
         this.x *=-1;
     }
-    public void changeY(Vector2D v){
+    public void reverseY(Vector2D v){
         this.y *=-1;
     }
 

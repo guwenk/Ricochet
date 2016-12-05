@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/eye"
+        android:background="@drawable/play"
         android:id="@+id/MA2_buttonToMA1"
         style="@style/Widget.AppCompat.Button.Borderless" />
 </RelativeLayout>

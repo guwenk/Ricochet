@@ -48,10 +48,10 @@ public class MObject {
 
 
     void drawCircle(Canvas canvas){ //Создание круга
-        canvas.drawCircle(pos.x, pos.y, this.sizeC, paint);
+        canvas.drawCircle(pos.x, pos.y, sizeC, paint);
     }
     void drawSquare(Canvas canvas){ //Создание квадрата
-        canvas.drawRect(pos.x, pos.y, pos.x+this.sizeS, pos.y+sizeS, paint);
+        canvas.drawRect(pos.x, pos.y, pos.x+sizeS, pos.y+sizeS, paint);
     }
 
     void move (float x, float y,String figure ,int resX, int resY){
@@ -64,17 +64,17 @@ public class MObject {
         }
         if (figure == "Circle"){
             if ((pos.x >= resolutionX - sizeC && velocityMem.x > 0) || (pos.x <= sizeC && velocityMem.x < 0)) {
-                velocityMem.changeX(velocityMem);
+                velocityMem.reverseX(velocityMem);
             }
             if ((pos.y >= resolutionY - 250 - sizeC && velocityMem.y > 0) || (pos.y <= 0 + sizeC && velocityMem.y < 0)) {
-                velocityMem.changeY(velocityMem);
+                velocityMem.reverseY(velocityMem);
             }
         }else if (figure == "Square"){
             if ((pos.x >= resolutionX-sizeS && velocityMem.x > 0) || (pos.x <= 0 && velocityMem.x < 0)){
-                velocityMem.changeX(velocityMem);
+                velocityMem.reverseX(velocityMem);
             }
             if ((pos.y >= resolutionY - 250 - sizeS && velocityMem.y > 0) || (pos.y <= 0 && velocityMem.y < 0)){
-                velocityMem.changeY(velocityMem);
+                velocityMem.reverseY(velocityMem);
             }
         }
         pos.add(velocityMem);
