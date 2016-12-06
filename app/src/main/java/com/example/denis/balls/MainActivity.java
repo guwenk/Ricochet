@@ -50,11 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 }
             }
         });
-
-        final Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
-        Point p = new Point();
-        display.getSize(p);
-        mydraw.setResolution(p.x, p.y);
     }
 
     @Override
@@ -62,14 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         final MyDraw mydraw = (MyDraw)findViewById(R.id.view);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                Log.d("Touch","ACTION_DOWN");
                 for (int i = 0; i < mydraw.arrMO.length; i++) {
                     if (mydraw.arrMO[i].isTouched(event.getX(),event.getY())) {
                         mydraw.arrMO[i].velocityMem.mul(-1);
                     }
-                    Log.d("FigureID["+mydraw.arrMO[i].figure+"]", mydraw.arrMO[i].pos.x+" ; "+mydraw.arrMO[i].pos.y);
                 }
-                Log.d("Coords",event.getX() + " ; " + event.getY());
 
                 break;
             case MotionEvent.ACTION_MOVE:

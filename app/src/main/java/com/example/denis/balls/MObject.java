@@ -5,13 +5,13 @@ import android.graphics.Paint;
 
 
 class MObject implements Drawable, Touchable {
-    Vector2D pos;//
+    private Vector2D pos;//
     Vector2D velocityMem; //сохранение скорости в класс
     private Paint paint;
     private float sizeS = 50f; //длина стороны квадрата
     private float sizeC = 30f; //радиус круга
     private boolean velocityMemCheck = false;
-    byte figure = 0;//
+    private byte figure = 0;//
     private int resolutionX;
     private int resolutionY;
 
@@ -64,14 +64,14 @@ class MObject implements Drawable, Touchable {
             if ((pos.x >= resolutionX - sizeC && velocityMem.x > 0) || (pos.x <= sizeC && velocityMem.x < 0)) {
                 velocityMem.reverseX();
             }
-            if ((pos.y >= resolutionY - 250 - sizeC && velocityMem.y > 0) || (pos.y <= 0 + sizeC && velocityMem.y < 0)) {
+            if ((pos.y >= resolutionY - 1 - sizeC && velocityMem.y > 0) || (pos.y <= 0 + sizeC && velocityMem.y < 0)) {
                 velocityMem.reverseY();
             }
         }else if (figure == figureSquare()){
             if ((pos.x >= resolutionX-sizeS && velocityMem.x > 0) || (pos.x <= 0 && velocityMem.x < 0)){
                 velocityMem.reverseX();
             }
-            if ((pos.y >= resolutionY - 250 - sizeS && velocityMem.y > 0) || (pos.y <= 0 && velocityMem.y < 0)){
+            if ((pos.y >= resolutionY - 1 - sizeS && velocityMem.y > 0) || (pos.y <= 0 && velocityMem.y < 0)){
                 velocityMem.reverseY();
             }
         }

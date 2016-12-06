@@ -13,7 +13,8 @@
             android:id="@+id/view"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/buttonSlowDown" />
 
         <Button
             android:layout_width="match_parent"
