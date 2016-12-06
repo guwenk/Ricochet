@@ -10,9 +10,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import static android.R.attr.x;
-import static android.R.attr.y;
-
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     @Override
