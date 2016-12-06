@@ -1,13 +1,9 @@
 package com.example.denis.balls;
 
-import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
