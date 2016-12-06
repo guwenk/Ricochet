@@ -4,13 +4,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 
 
-class MObject {
-    private Vector2D pos;
+class MObject implements Drawable, Touchable {
+    Vector2D pos;//
     Vector2D velocityMem; //сохранение скорости в класс
     private Paint paint;
     private float sizeS = 50f; //длина стороны квадрата
     private float sizeC = 30f; //радиус круга
     private boolean velocityMemCheck = false;
+    byte figure = 0;//
     private int resolutionX;
     private int resolutionY;
 
@@ -42,15 +43,15 @@ class MObject {
 
 
 
-
-    void drawCircle(Canvas canvas){ //Создание круга
-        canvas.drawCircle(pos.x, pos.y, sizeC, paint);
+    @Override
+    public void drawObject(Canvas canvas, byte figure){
+        this.figure = figure;
+        if (figure == figureCircle()) canvas.drawCircle(pos.x, pos.y, sizeC, paint);
+        else if (figure == figureSquare()) canvas.drawRect(pos.x, pos.y, pos.x+sizeS, pos.y+sizeS, paint);
     }
-    void drawSquare(Canvas canvas){ //Создание квадрата
-        canvas.drawRect(pos.x, pos.y, pos.x+sizeS, pos.y+sizeS, paint);
-    }
 
-    void move (float x, float y,byte figure ,int resX, int resY){
+    @Override
+    public void move(float x, float y, int resX, int resY){
         Vector2D velocity;
         this.resolutionX = resX;
         this.resolutionY = resY;
@@ -84,13 +85,17 @@ class MObject {
     byte figureSquare() {
         return 2;
     }
-    /* Проверка косания
-    boolean isTouchedS(MotionEvent event){
-        return (event.getX() > pos.x && event.getX() < pos.x+sizeS &&
-                event.getY() > pos.y && event.getY() < pos.y+sizeS);
+
+    @Override
+    public boolean isTouched(float touchedX, float touchedY) {
+        if (figure == figureCircle()) {
+            return (touchedX > pos.x-sizeC && touchedX < pos.x+sizeC &&
+                    touchedY > pos.y-sizeC && touchedY < pos.y+sizeC);
+        } else if (figure == figureSquare()){
+            return (touchedX > pos.x && touchedX < pos.x+sizeS &&
+                    touchedY > pos.y && touchedY < pos.y+sizeS);
+        }
+
+        return false;
     }
-    boolean isTouchedC(MotionEvent event){
-        return (event.getX() > pos.x-sizeC && event.getX() < pos.x+sizeC && event.getY() > pos.y-sizeC && event.getX() < pos.y+sizeC);
-    }
-    */
 }

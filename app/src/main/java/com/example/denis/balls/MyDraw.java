@@ -18,9 +18,9 @@ public class MyDraw extends View{
     public MyDraw(Context context, AttributeSet attrs) {
         super(context, attrs);
         Random rand = new Random();
-        arrMO = new MObject[50];
+        arrMO = new MObject[2];
         for (int i = 0; i < arrMO.length; i++)
-            arrMO[i] = new MObject((float)(Math.random() * 100+50), (float)(Math.random() * 100+50), (float)(Math.random()*25+10), Color.rgb(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255)));
+            arrMO[i] = new MObject((float)(Math.random() * 100+50), (float)(Math.random() * 100+50), (float)(Math.random()*25+20), Color.rgb(rand.nextInt(255),rand.nextInt(255),rand.nextInt(255)));
 
     }
     Paint paint = new Paint();
@@ -31,12 +31,12 @@ public class MyDraw extends View{
         borderY = resY-250;
         canvas.drawLine(0, borderY, resX, borderY, paint);
         for(int i = 0; i < arrMO.length/2; i++) {
-            arrMO[i].drawCircle(canvas);
-            arrMO[i].move((float)((Math.random() * 500-250)*0.01),(float)((Math.random() * 500-250)*0.01),arrMO[i].figureCircle() ,resX, resY);
+            arrMO[i].drawObject(canvas, arrMO[i].figureCircle());
+            arrMO[i].move((float)((Math.random() * 500-250)*0.01),(float)((Math.random() * 500-250)*0.01),resX, resY);
         }
         for(int i = arrMO.length/2; i < arrMO.length; i++) {
-            arrMO[i].drawSquare(canvas);
-            arrMO[i].move((float)((Math.random() * 500-250)*0.01),(float)((Math.random() * 500-250)*0.01),arrMO[i].figureSquare() ,resX, resY);
+            arrMO[i].drawObject(canvas, arrMO[i].figureSquare());
+            arrMO[i].move((float)((Math.random() * 500-250)*0.01),(float)((Math.random() * 500-250)*0.01),resX, resY);
         }
 
         invalidate();
