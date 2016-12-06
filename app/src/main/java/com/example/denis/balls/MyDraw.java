@@ -9,7 +9,6 @@ import android.view.View;
 
 import java.util.Random;
 
-
 public class MyDraw extends View{
     MObject[] arrMO;
 
